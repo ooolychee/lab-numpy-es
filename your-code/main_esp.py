@@ -1,72 +1,93 @@
-#1. Importa el paquete NUMPY bajo el nombre np.
+##1. Importa el paquete NUMPY bajo el nombre np.
 
-#[tu código aquí]
+import numpy as np
 
 
 #2. Imprime la versión de NUMPY y la configuración.
 
-#[tu código aquí]
+print("Versión de NumPy:", np.__version__)
+
+# Imprimir la configuración de NumPy
+print("Configuración de NumPy:")
+print(np.show_config())
 
 
 #3. Genera un array tridimensional de 2x3x5 con valores aleatorios. Asigna el array a la variable "a"
 # Desafío: hay al menos tres maneras fáciles que usan numpy para generar arrays aleatorios. ¿Cuántas formas puedes encontrar?
 
-#[tu código aquí]
+a = np.random.rand(2, 3, 5)
+
+print("Array generated:")
+
 
 #4. Imprime a.
+print(a)
 
 #[tu código aquí]
 #5. Crea un array tridimensional de 5x2x3 con todos los valores igual a 1.
 #Asigna el array a la variable "b"
 
-#[tu código aquí]
+b = np.ones((5, 2, 3))
+
+print("Array generated:")
 
 #6. Imprime b.
-
-#[tu código aquí]
+print(b)
 
 #7. ¿Tienen a y b el mismo tamaño? ¿Cómo lo demuestras en código Python?
 
-#[tu código aquí]
+a.size ==b.size
 
 #8. ¿Es posible sumar a y b? ¿Por qué sí o por qué no?
 
-#[tu código aquí]
+Yes bc a And b share the same size. 
 
+sum_ = a + b
 
 #9. Transpone b para que tenga la misma estructura que a (es decir, se convierta en un array de 2x3x5). Asigna el array transpuesto a la variable "c".
 
-#[tu código aquí]
+c = np.transpose(b, (2,3,5))
 
+print("Array transposed:")
+print(c)
 #10. Intenta sumar a y c. Ahora debería funcionar. Asigna la suma a la variable "d". Pero, ¿por qué funciona ahora?
 
-#[tu código aquí]
+d = a + c
 
+print("sum result:")
+print(d)
 #11. Imprime a y d. ¿Notas la diferencia y la relación entre los dos arrays en términos de los valores? Explica.
 
-#[tu código aquí]
-
+print("Array 'a':")
+print(a)
+print("\nArray 'd' (sum result):")
+print(d)
 
 #12. Multiplica a y c. Asigna el resultado a e.
 
-#[tu código aquí]
+e = a * c
 
+print("Result of multiplicacion:")
+print(e)
 
 #13. ¿Es e igual a a? ¿Por qué sí o por qué no?
 
-#[tu código aquí]
-
-
+No son iguales 
+e Is by multiplying each elements In the array. 
 
 #14. Identifica los valores máximos, mínimos y medios en d. Asigna esos valores a las variables "d_max", "d_min" y "d_mean"
 
-#[tu código aquí]
+d_max = np.max(d)
+d_min = np.min(d)
+d_mean = np.mean(d)
 
 
 #15. Ahora queremos etiquetar los valores en d. Primero crea un array vacío "f" con la misma forma (es decir, 2x3x5) que d usando `np.empty`.
 
-#[tu código aquí]
+f = np.empty(d)
 
+print("Array 'f':")
+print(f)
 
 """
 #16. Rellena los valores en f. Para cada valor en d, si es mayor que d_min pero menor que d_mean, asigna 25 al valor correspondiente en f.
@@ -77,9 +98,20 @@ Asigna 100 al valor correspondiente(s) en f para d_max en d.
 Al final, f debería tener solo los siguientes valores: 0, 25, 50, 75 y 100.
 Nota: no necesitas usar Numpy en esta pregunta.
 """
-
-#[tu código aquí]
-
+dim = d.shape
+for i in range(dim[0]):
+    for j in range(dim[1]):
+        for k in range(dim[2]):
+            if d[i, j, k] > d_min and d[i, j, k] < d_mean:
+                f[i, j, k] = 25
+            elif d[i, j, k] > d_mean and d[i, j, k] < d_max:
+                f[i, j, k] = 75
+            elif d[i, j, k] == d_mean:
+                f[i, j, k] = 50
+            elif d[i, j, k] == d_min:
+                f[i, j, k] = 0
+            elif d[i, j, k] == d_max:
+                f[i, j, k] = 100
 
 
 
@@ -104,8 +136,10 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
 
-#[tu código aquí]
 
+print(d)
+
+print(f)
 
 
 """
@@ -121,4 +155,20 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
 De nuevo, no necesitas Numpy en esta pregunta.
 """
 
-#[tu código aquí]
+f = np.empty(dim, dtype=str)
+
+for i in range(dim[0]):
+    for j in range(dim[1]):
+        for k in range(dim[2]):
+            if d[i, j, k] > d_min and d[i, j, k] < d_mean:
+                f[i, j, k] = 'B'
+            elif d[i, j, k] > d_mean and d[i, j, k] < d_max:
+                f[i, j, k] = 'D'
+            elif d[i, j, k] == d_mean:
+                f[i, j, k] = 'C'
+            elif d[i, j, k] == d_min:
+                f[i, j, k] = 'A'
+            elif d[i, j, k] == d_max:
+                f[i, j, k] = 'E'
+
+print(f)
